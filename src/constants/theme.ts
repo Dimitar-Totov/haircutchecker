@@ -14,6 +14,19 @@ export const Colors = {
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
     textSecondary: '#60646C',
+    // Hairstyle try-on flow tokens (mapped from the design prototype's
+    // --card/--field/--line/--accent CSS vars).
+    card: '#F4F4F7',
+    field: '#EDEDF1',
+    line: 'rgba(0,0,0,0.09)',
+    accent: '#5B3DF5',
+    accentText: '#FFFFFF',
+    feasibilityTodayText: '#0E8F4E',
+    feasibilityTodayBackground: 'rgba(14,143,78,0.15)',
+    feasibilityGrowText: '#B57E0A',
+    feasibilityGrowBackground: 'rgba(181,126,10,0.18)',
+    feasibilityPermText: '#C8492A',
+    feasibilityPermBackground: 'rgba(200,73,42,0.16)',
   },
   dark: {
     text: '#ffffff',
@@ -21,6 +34,17 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
+    card: '#18181E',
+    field: '#25252C',
+    line: 'rgba(255,255,255,0.11)',
+    accent: '#8B74FF',
+    accentText: '#FFFFFF',
+    feasibilityTodayText: '#0E8F4E',
+    feasibilityTodayBackground: 'rgba(14,143,78,0.15)',
+    feasibilityGrowText: '#B57E0A',
+    feasibilityGrowBackground: 'rgba(181,126,10,0.18)',
+    feasibilityPermText: '#C8492A',
+    feasibilityPermBackground: 'rgba(200,73,42,0.16)',
   },
 } as const;
 

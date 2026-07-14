@@ -1,61 +1,61 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+const STEPS = [
+  { title: 'Take a photo', body: 'A quick selfie is all we need to read your face and hair.' },
+  { title: 'Check your profile', body: 'Fine-tune face shape, length, texture, density, and hairline.' },
+  { title: 'Browse styles', body: 'See what fits, try it on, and take the look to your barber.' },
+];
 
 export default function HomeScreen() {
+  const theme = useTheme();
+  const router = useRouter();
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
           <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
+            Hairstyle Try-On
+          </ThemedText>
+          <ThemedText themeColor="textSecondary" style={styles.subtitle}>
+            See yourself in a new haircut before you book the chair.
           </ThemedText>
         </ThemedView>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
         <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
+          {STEPS.map((step, index) => (
+            <View key={step.title} style={styles.stepRow}>
+              <ThemedView type="card" style={styles.stepIndex}>
+                <ThemedText type="smallBold">{index + 1}</ThemedText>
+              </ThemedView>
+              <View style={styles.stepCopy}>
+                <ThemedText type="smallBold">{step.title}</ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {step.body}
+                </ThemedText>
+              </View>
+            </View>
+          ))}
         </ThemedView>
 
-        {Platform.OS === 'web' && <WebBadge />}
+        <Pressable
+          onPress={() => router.push('/try-on')}
+          accessibilityRole="button"
+          style={({ pressed }) => [
+            styles.cta,
+            { backgroundColor: theme.accent, opacity: pressed ? 0.85 : 1 },
+          ]}>
+          <ThemedText type="default" themeColor="accentText" style={styles.ctaText}>
+            Start your try-on
+          </ThemedText>
+        </Pressable>
       </SafeAreaView>
     </ThemedView>
   );
@@ -64,35 +64,57 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: 'center',
   },
   safeArea: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
+    width: '100%',
     maxWidth: MaxContentWidth,
+    paddingHorizontal: Spacing.four,
+    paddingBottom: BottomTabInset + Spacing.three,
+    justifyContent: 'center',
+    gap: Spacing.four,
   },
   heroSection: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    gap: Spacing.two,
   },
   title: {
+    fontSize: 34,
+    lineHeight: 38,
     textAlign: 'center',
   },
-  code: {
-    textTransform: 'uppercase',
+  subtitle: {
+    textAlign: 'center',
   },
   stepContainer: {
     gap: Spacing.three,
-    alignSelf: 'stretch',
+    borderRadius: Spacing.four,
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  },
+  stepRow: {
+    flexDirection: 'row',
+    gap: Spacing.three,
+  },
+  stepIndex: {
+    width: 28,
+    height: 28,
+    borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stepCopy: {
+    flex: 1,
+    gap: Spacing.half,
+  },
+  cta: {
+    paddingVertical: 17,
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+  ctaText: {
+    fontSize: 17,
+    fontWeight: '600',
   },
 });
