@@ -1,3 +1,100 @@
+### Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+### Expo / React Native
+.expo/
+.expo-shared/
+.expo-shared/assets.json
+android/
+ios/
+web-build/
+build/
+dist/
+*.keystore
+*.jks
+
+### Metro / cache
+.expo/cache/
+expo/.cache/
+metro-cache/
+*.temp
+
+### TypeScript
+*.tsbuildinfo
+
+### Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### Coverage
+coverage/
+.nyc_output/
+
+### Environment
+.env
+.env.*
+.env.local
+
+### IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.iml
+
+### macOS
+.DS_Store
+
+### Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+### Build outputs / caches
+.cache/
+.parcel-cache/
+.next/
+out/
+tmp/
+dist/
+
+### Yarn PnP
+.pnp.cjs
+.pnp.js
+.pnp.*
+
+### Generated artifacts
+*.apk
+*.ap_
+*.aab
+*.ipa
+
+### Certificates / keys
+*.pem
+*.p12
+*.key
+*.cer
+*.crt
+*.der
+
+### React Native specific
+android/app/debug.keystore
+
+### Misc
+/.expo/cache
+npm-debug.log*
+yarn-error.log*
+logs/
+coverage/
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
