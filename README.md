@@ -2,6 +2,8 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Waiting Expo Go to release sdk 57 to app store to continue the work here... 
+
 ## Get started
 
 1. Install dependencies
